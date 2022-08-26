@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>doS</title>
+    <style>
+      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+      .block {
+        border: 5px solid black;
+        width: 75%;
+        height: 250px;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>show all error</h1>
+    <a href="/"><button>home</button></a>
+    <div class="all-post">
+    </div>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    function httpGet()
+    {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open( "GET", "/post/raw", false );
+        xmlHttp.send( null );
+        return xmlHttp.responseText;
+    }
+    const a = httpGet()
+
+    const b = JSON.parse(a)
+    let content = document.querySelector(".all-post")
+
+    for (let i = 0; i <= b.length; i++)
+    {
+            const err = b[i]['err']
+            const ver = b[i]['version']
+
+            content.innerHTML += `<div class="block"><h2>${ver}</h2><h3>${err}</h3></div>\n`
+    }
+  </script>
+</html>

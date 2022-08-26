@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>doS</title>
+    <style>
+      body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    </style>
+  </head>
+  <body>
+    <div>
+      <form method="POST" action="/post/create">
+        <div>
+        <lable for="err"> error </lable>
+        <textarea id="err" name="err"></textarea>
+        </div>
+        <div>
+        <lable for="version"> version </lable>
+        <input id="version" name="version"></input>
+        </div>
+        <button type="submit">upload</button>
+      </form>
+      <a href="/"><button>home</button></a>
+    </div>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+    const err = document.getElementById("err")
+    const ver = document.getElementById("version")
+
+    httpPost("/post/create", {
+            err: err,
+            ver: ver
+        })
+  </script>
+</html>
